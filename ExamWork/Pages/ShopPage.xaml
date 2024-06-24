@@ -1,0 +1,60 @@
+﻿<Page x:Class="ExamWork.Pages.ShopPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ExamWork.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ShopPage">
+
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left">
+            <Grid>
+                <TextBox x:Name="userSearchTextBox" Width="250" Margin="0,0,250,0"/>
+                <Button Content="Поиск" x:Name="searchButton" Width="50" Margin="250,0,200,0"/>
+                <Label Content="Сортирвоать по: " Width="100" Margin="300,0,100,0"/>
+                <ComboBox x:Name="filterComboBox" Width="100" Margin="400, 0, 0, 0" SelectionChanged="filterComboBox_SelectionChanged">
+                    <ComboBoxItem>возрастанию цены</ComboBoxItem>
+                    <ComboBoxItem>убыванию цены</ComboBoxItem>
+                    <ComboBoxItem>дате опубликации</ComboBoxItem>
+                    <ComboBoxItem>названию</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+            
+            <ListView x:Name="productListView" Width="500" Height="450" HorizontalAlignment="Left">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="local:Product">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="400"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Description}"/>
+                                <TextBlock Text="{Binding Manufacturer}"/>
+                            </StackPanel>
+                            
+                            <TextBlock Text="{Binding Price}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+                            
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        
+        <StackPanel DockPanel.Dock="Right">
+            <Label x:Name="PriceLabel" Content="Цена" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Slider x:Name="priceSlider"  Minimum="500" Maximum="5000" IsSnapToTickEnabled="True" TickPlacement="BottomRight" Width="200" ValueChanged="priceSlider_ValueChanged" >
+                <Slider.Ticks>
+                    <DoubleCollection>
+                        500, 1000, 2000, 3000, 4000, 5000
+                    </DoubleCollection>
+                </Slider.Ticks>
+            </Slider>
+            <CheckBox Content="Специальные предложения" Margin="0, 10, 0, 0" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </DockPanel>
+</Page>
